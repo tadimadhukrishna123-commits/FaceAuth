@@ -2,13 +2,13 @@ package com.npci.faceauth;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
 
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-// NPCI activity inside the AAR
 import org.npci.upi.security.pinactivitycomponent.GetCredential;
 
 public class FaceAuthPlugin extends CordovaPlugin {
@@ -30,7 +30,6 @@ public class FaceAuthPlugin extends CordovaPlugin {
                 JSONObject payload = args.getJSONObject(0);
 
                 Intent intent = new Intent(activity, GetCredential.class);
-
                 intent.putExtra("request", payload.toString());
 
                 cordova.startActivityForResult(this, intent, FACEAUTH_REQUEST);
@@ -56,20 +55,30 @@ public class FaceAuthPlugin extends CordovaPlugin {
 
         try {
 
-            JSONObject result = new JSONObject();
+            if (resultCode == Activity.RESULT_OK && intent != null) {
 
-            if (intent != null && intent.getExtras() != null) {
+                JSONObject result = new JSONObject();
 
-                for (String key : intent.getExtras().keySet()) {
+                Bundle bundle = intent.getExtras();
 
-                    Object val = intent.getExtras().get(key);
-                    result.put(key, val == null ? JSONObject.NULL : val.toString());
+                if (bundle != null) {
+
+                    for (String key : bundle.keySet()) {
+
+                        Object value = bundle.get(key);
+                        result.put(key, value != null ? value.toString() : "");
+
+                    }
 
                 }
 
-            }
+                callback.success(result);
 
-            callback.success(result);
+            } else {
+
+                callback.error("FaceAuth cancelled or no result");
+
+            }
 
         } catch (Exception e) {
 
@@ -78,5 +87,4 @@ public class FaceAuthPlugin extends CordovaPlugin {
         }
 
     }
-
 }
