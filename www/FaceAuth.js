@@ -9,7 +9,7 @@ var FaceAuth = {
             error,
             "FaceAuth",
             "startAuth",
-            [payload]
+             [payload]
         );
 
     }
