@@ -1,0 +1,11 @@
+def appLibs = new File(rootProject.projectDir, "app/libs")
+
+repositories {
+    flatDir {
+        dirs appLibs
+    }
+}
+
+dependencies {
+    implementation(name: "npci-faceauth", ext: "aar")
+}

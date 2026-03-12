@@ -1,0 +1,11 @@
+{
+  "name": "com.npci.faceauth",
+  "version": "1.0.0",
+  "description": "NPCI FaceAuth Cordova Plugin",
+  "cordova": {
+    "id": "com.npci.faceauth",
+    "platforms": [
+      "android"
+    ]
+  }
+}
