@@ -13,26 +13,31 @@
 
     <platform name="android">
 
-        <config-file target="res/xml/config.xml" parent="/*">
+        <!-- Register plugin -->
+        <config-file target="config.xml" parent="/*">
             <feature name="FaceAuth">
-                <param name="android-package" value="com.npci.faceauth.FaceAuthPlugin" />
+                <param name="android-package" value="com.npci.faceauth.FaceAuthPlugin"/>
             </feature>
         </config-file>
 
+        <!-- Java plugin -->
         <source-file src="src/android/FaceAuthPlugin.java"
-                     target-dir="src/com/npci/faceauth" />
+                     target-dir="src/com/npci/faceauth"/>
 
+        <!-- NPCI SDK AAR -->
         <source-file src="src/android/libs/npci-faceauth.aar"
-                     target-dir="app/libs" />
+                     target-dir="libs"/>
 
+        <!-- Gradle reference -->
         <framework src="src/android/faceauth.gradle"
                    custom="true"
-                   type="gradleReference" />
+                   type="gradleReference"/>
 
+        <!-- Permissions -->
         <config-file target="AndroidManifest.xml" parent="/manifest">
-            <uses-permission android:name="android.permission.CAMERA" />
-            <uses-permission android:name="android.permission.INTERNET" />
-            <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+            <uses-permission android:name="android.permission.CAMERA"/>
+            <uses-permission android:name="android.permission.INTERNET"/>
+            <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
         </config-file>
 
     </platform>
